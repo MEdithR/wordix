@@ -336,14 +336,36 @@ function esIntentoGanado($estructuraPalabraIntento)
 
 /**
  *Calcula el puntaje obtenido en una partida
- * documentación de la intefaz
+ * @param string $palabras
+ * @param int $numInt
+ * @return int
  * 
  */
-function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales necesarios */
+function obtenerPuntajeWordix($palabras,$numInt)
 {
+    $puntaje=0;
 
-    /* ****COMPLETAR***** cuerpo de la función*/
-    return 0;
+for($i=0;$i<5;$i++){
+    switch($palabras[$i]){
+        case "a"; case "e"; case "i"; case "o"; case "u";
+            $puntaje=$puntaje+1;
+            break;
+        case $letras =<"m";/*ARREGLAR DESPUES F/Edi**///
+            $puntaje=$puntaje+2;
+            break;
+        default:
+            $puntaje=$puntaje+3;
+            break;
+
+    }
+    
+}
+$intentos=7-$numInt;
+
+$puntaje=$puntaje+$intentos;
+
+return $puntaje;
+
 }
 
 /**
