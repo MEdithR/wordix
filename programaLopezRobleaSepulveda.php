@@ -9,7 +9,7 @@ include_once("wordix.php");
 
 /* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
 /*Lopez, Lucas. legajo: FAI-3327. mail: lopezlucasnqn@gmail.com . github lucasarg2023 
- * Robles, Marta Edith. legajo: FAI-4978. mail: m.edith.robles@gmail.com . github: MEdithR 
+ *Robles, Marta Edith. legajo: FAI-4978. mail: m.edith.robles@gmail.com . github: MEdithR 
  *Sepulveda, Mario. legajo FAI-1956. mail: mario.sepulveda@est.fi.uncoma.edu.ar . github: Nightmare716 */
 
 
@@ -28,13 +28,33 @@ function cargarColeccionPalabras()
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
         "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
         "PERRO", "MANGO"
-        /* Agregar 5 palabras más */
+        /* Agregar 3 palabras más */
     ];
 
     return ($coleccionPalabras);
 }
 
-/* ****COMPLETAR***** */
+
+/** inicializa una estructura de datos con partidas de jugadores
+ *@return array
+ */
+function cargarPartidas(){
+    //@param array $coleccionPartidas//
+    $coleccionPartidas[0]=["palabraWordix"=>"MUJER","jugador"=>"blopa","intentos"=>4,"puntaje"=>8];
+    $coleccionPartidas[1]=["palabraWordix"=>"YUYOS","jugador"=>"demian","intentos"=>1,"puntaje"=>8];
+    $coleccionPartidas[2]=["palabraWordix"=>"PIANO","jugador"=>"pauu","intentos"=>3,"puntaje"=>8];
+    $coleccionPartidas[3]=["palabraWordix"=>"HUEVO","jugador"=>"Blopa","intentos"=>3,"puntaje"=>8];
+    $coleccionPartidas[4]=["palabraWordix"=>"MANGO","jugador"=>"tsuki","intentos"=>2,"puntaje"=>8];
+    $coleccionPartidas[5]=["palabraWordix"=>"PIANO","jugador"=>"tsuki","intentos"=>4,"puntaje"=>8];
+    $coleccionPartidas[6]=["palabraWordix"=>"GOTAS","jugador"=>"cinn","intentos"=>6,"puntaje"=>8];
+    $coleccionPartidas[7]=["palabraWordix"=>"FUEGO","jugador"=>"Blopa","intentos"=>6,"puntaje"=>8];
+    $coleccionPartidas[8]=["palabraWordix"=>"MUJER","jugador"=>"mathi","intentos"=>2,"puntaje"=>8];
+    $coleccionPartidas[9]=["palabraWordix"=>"TINTO","jugador"=>"mathi","intentos"=>5,"puntaje"=>8];
+    //calcular los puntajes//
+    return $coleccionPalabras;
+
+}
+/* ****COMPLETAR***** */ 
 
 
 
