@@ -155,8 +155,8 @@ function esPalabra($cadena)
 }
 
 /**
- * Solisita un palabra de 5 letras al usurio y la convierte en mayusculas
- * @return $string
+ * Solicita un palabra de 5 letras al usurio, la evelua y la convierte en mayusculas
+ * @return string
  */
 function leerPalabra5Letras()
 {
@@ -314,7 +314,7 @@ function actualizarTeclado($teclado, $estructuraPalabraIntento)
 /**
  * Determina si se ganó una palabra intento posee todas sus letras "Encontradas".
  * @param array $estructuraPalabraIntento
- * @return boolean
+ * @return bool
  */
 function esIntentoGanado($estructuraPalabraIntento)
 {
@@ -335,7 +335,8 @@ function esIntentoGanado($estructuraPalabraIntento)
 }
 
 /**
- * ****COMPLETAR***** documentación de la intefaz
+ *Calcula el puntaje obtenido en una partida
+ * documentación de la intefaz
  * 
  */
 function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales necesarios */
