@@ -40,17 +40,17 @@ function cargarColeccionPalabras()
  */
 function cargarPartidas(){
     //@param array $coleccionPartidas//
-    $coleccionPartidas[0]=["palabraWordix"=>"MUJER","jugador"=>"blopa","intentos"=>4,"puntaje"=>8];
-    $coleccionPartidas[1]=["palabraWordix"=>"YUYOS","jugador"=>"demian","intentos"=>1,"puntaje"=>8];
-    $coleccionPartidas[2]=["palabraWordix"=>"PIANO","jugador"=>"pauu","intentos"=>3,"puntaje"=>8];
-    $coleccionPartidas[3]=["palabraWordix"=>"HUEVO","jugador"=>"Blopa","intentos"=>3,"puntaje"=>8];
-    $coleccionPartidas[4]=["palabraWordix"=>"MANGO","jugador"=>"tsuki","intentos"=>2,"puntaje"=>8];
-    $coleccionPartidas[5]=["palabraWordix"=>"PIANO","jugador"=>"tsuki","intentos"=>4,"puntaje"=>8];
-    $coleccionPartidas[6]=["palabraWordix"=>"GOTAS","jugador"=>"cinn","intentos"=>6,"puntaje"=>8];
-    $coleccionPartidas[7]=["palabraWordix"=>"FUEGO","jugador"=>"Blopa","intentos"=>6,"puntaje"=>8];
-    $coleccionPartidas[8]=["palabraWordix"=>"MUJER","jugador"=>"mathi","intentos"=>2,"puntaje"=>8];
-    $coleccionPartidas[9]=["palabraWordix"=>"TINTO","jugador"=>"mathi","intentos"=>5,"puntaje"=>8];
-    //calcular los puntajes//
+    $coleccionPartidas[0]=["palabraWordix"=>"MUJER","jugador"=>"blopa","intentos"=>4,"puntaje"=>12];
+    $coleccionPartidas[1]=["palabraWordix"=>"YUYOS","jugador"=>"demian","intentos"=>1,"puntaje"=>17];
+    $coleccionPartidas[2]=["palabraWordix"=>"PIANO","jugador"=>"pauu","intentos"=>3,"puntaje"=>13];
+    $coleccionPartidas[3]=["palabraWordix"=>"HUEVO","jugador"=>"Blopa","intentos"=>3,"puntaje"=>12];
+    $coleccionPartidas[4]=["palabraWordix"=>"MANGO","jugador"=>"tsuki","intentos"=>2,"puntaje"=>14];
+    $coleccionPartidas[5]=["palabraWordix"=>"PIANO","jugador"=>"tsuki","intentos"=>4,"puntaje"=>12];
+    $coleccionPartidas[6]=["palabraWordix"=>"GOTAS","jugador"=>"cinn","intentos"=>6,"puntaje"=>11];
+    $coleccionPartidas[7]=["palabraWordix"=>"FUEGO","jugador"=>"Blopa","intentos"=>6,"puntaje"=>0];
+    $coleccionPartidas[8]=["palabraWordix"=>"MUJER","jugador"=>"mathi","intentos"=>2,"puntaje"=>11];
+    $coleccionPartidas[9]=["palabraWordix"=>"TINTO","jugador"=>"mathi","intentos"=>5,"puntaje"=>13];
+    
     return $coleccionPalabras;
 
 }
