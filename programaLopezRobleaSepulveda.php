@@ -27,8 +27,8 @@ function cargarColeccionPalabras()
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
         "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
-        "PERRO", "MANGO"
-        /* Agregar 3 palabras más */
+        "PERRO", "MANGO", "CINCO", "CIRCO", "MAGIA"
+        
     ];
 
     return ($coleccionPalabras);
