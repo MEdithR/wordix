@@ -170,6 +170,7 @@ function leerPalabra5Letras()
         $palabra = strtoupper(trim(fgets(STDIN)));
     }
     return $palabra;
+    
 }
 
 
@@ -337,11 +338,11 @@ function esIntentoGanado($estructuraPalabraIntento)
 /**
  *Calcula el puntaje obtenido en una partida
  * @param string $palabras
- * @param int $numInt
+ * @param int $numIntentos
  * @return int
  * 
  */
-function obtenerPuntajeWordix($palabras,$numInt)
+function obtenerPuntajeWordix($palabras,$numIntentos)
 {
     $puntaje=0;
 
@@ -350,7 +351,7 @@ for($i=0;$i<5;$i++){
         case "a"; case "e"; case "i"; case "o"; case "u";
             $puntaje=$puntaje+1;
             break;
-        case $letras =<"m";/*ARREGLAR DESPUES F/Edi**///
+        case $letras <="m"; /*ARREGLAR DESPUES F/Edi**///
             $puntaje=$puntaje+2;
             break;
         default:
@@ -360,7 +361,7 @@ for($i=0;$i<5;$i++){
     }
     
 }
-$intentos=7-$numInt;
+$intentos=7-$numIntemtos;
 
 $puntaje=$puntaje+$intentos;
 
