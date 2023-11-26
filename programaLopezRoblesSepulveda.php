@@ -54,6 +54,32 @@ function cargarPartidas(){
     return $coleccionPalabras;
 
 }
+
+/**Mustra un menu de opciones
+ * @return int
+ */
+function seleccionarOpcion (){
+    //@param int $opcionVal//
+
+    echo "Menu de opciones: \n
+    1) Jugar wordix con una palabra elegida \n
+    2) Jugat wordix con una palabra aleatoria \n
+    3) Mostrar una partida \n
+    4) Mostar la primer partida ganadora \n
+    5) Mostar resumen de Jugador \n
+    6) Mostarar listado de partidas ordenadas por jugador y por palabra \n
+    7) Agregar una palabra de 5 letras a wordix \n
+    8) Salir \n";
+
+    $opcionVal = solicitarNumeroEntre(1, 8);
+
+
+    return $opcionVal;
+
+}
+
+
+
 /* ****COMPLETAR***** */ 
 
 
