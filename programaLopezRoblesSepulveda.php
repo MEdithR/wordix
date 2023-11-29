@@ -179,9 +179,12 @@ do {
             break;            
 
         case 6:
-            // Mostrar listado de partidas ordenadas por jugador y por palabra
-            ordenarPartidas($coleccionPartidas);
-            mostrarListadoPartidas($coleccionPartidas);
+            $coleccionPartidasOrdenadas = ordenarPartidas($coleccionPartidas);
+        
+            foreach ($coleccionPartidasOrdenadas as $partida) {
+                echo "Palabra: {$partida['palabraWordix']}, Jugador: {$partida['jugador']}, Intentos: {$partida['intentos']}, Puntaje: {$partida['puntaje']}\n";
+            }
+            
             break;
 
         case 7:
