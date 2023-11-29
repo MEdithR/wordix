@@ -55,20 +55,22 @@ function imprimirResultado($partida)
 function cargarPartidas()
 {
     //@param array $coleccionPartidas//
-    $coleccionPartidas = [];
+    $coleccion = [];
+$pa1 = ["palabraWordix" => "SUECO", "jugador" => "kleiton", "intentos" => 0, "puntaje" => 0];
+$pa2 = ["palabraWordix" => "YUYOS", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
+$pa3 = ["palabraWordix" => "HUEVO", "jugador" => "zrack", "intentos" => 3, "puntaje" => 9];
+$pa4 = ["palabraWordix" => "TINTO", "jugador" => "cabrito", "intentos" => 4, "puntaje" => 8];
+$pa5 = ["palabraWordix" => "RASGO", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
+$pa6 = ["palabraWordix" => "VERDE", "jugador" => "cabrito", "intentos" => 5, "puntaje" => 7];
+$pa7 = ["palabraWordix" => "CASAS", "jugador" => "kleiton", "intentos" => 5, "puntaje" => 7];
+$pa8 = ["palabraWordix" => "GOTAS", "jugador" => "kleiton", "intentos" => 0, "puntaje" => 0];
+$pa9 = ["palabraWordix" => "ZORRO", "jugador" => "zrack", "intentos" => 4, "puntaje" => 8];
+$pa10 = ["palabraWordix" => "GOTAS", "jugador" => "cabrito", "intentos" => 0, "puntaje" => 0];
+$pa11 = ["palabraWordix" => "FUEGO", "jugador" => "cabrito", "intentos" => 2, "puntaje" => 10];
+$pa12 = ["palabraWordix" => "TINTO", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
 
-    $coleccionPartidas[] = ["palabraWordix" => "MUJER", "jugador" => "blopa", "intentos" => 4, "puntaje" => 12];
-    $coleccionPartidas[] = ["palabraWordix" => "YUYOS", "jugador" => "demian", "intentos" => 1, "puntaje" => 17];
-    $coleccionPartidas[] = ["palabraWordix" => "PIANO", "jugador" => "pauu", "intentos" => 3, "puntaje" => 13];
-    $coleccionPartidas[] = ["palabraWordix" => "HUEVO", "jugador" => "Blopa", "intentos" => 3, "puntaje" => 12];
-    $coleccionPartidas[] = ["palabraWordix" => "MANGO", "jugador" => "tsuki", "intentos" => 2, "puntaje" => 14];
-    $coleccionPartidas[] = ["palabraWordix" => "PIANO", "jugador" => "tsuki", "intentos" => 4, "puntaje" => 12];
-    $coleccionPartidas[] = ["palabraWordix" => "GOTAS", "jugador" => "cinn", "intentos" => 6, "puntaje" => 11];
-    $coleccionPartidas[] = ["palabraWordix" => "FUEGO", "jugador" => "Blopa", "intentos" => 6, "puntaje" => 0];
-    $coleccionPartidas[] = ["palabraWordix" => "MUJER", "jugador" => "mathi", "intentos" => 2, "puntaje" => 11];
-    $coleccionPartidas[] = ["palabraWordix" => "TINTO", "jugador" => "mathi", "intentos" => 5, "puntaje" => 13];
-
-    return $coleccionPartidas;
+array_push($coleccion, $pa1, $pa2, $pa3, $pa4, $pa5, $pa6, $pa7, $pa8, $pa9, $pa10, $pa11, $pa12);
+return $coleccion;
 }
 
 /**Mustra un menu de opciones
@@ -190,9 +192,11 @@ do {
         case 7:
             // Agregar una palabra de 5 letras a Wordix
             $nuevaPalabra = leerPalabra5Letras();
+            $coleccionPalabras = cargarColeccionPalabras();
             // Agregar la nueva palabra a la colección
             array_push($coleccionPalabras, $nuevaPalabra);
-            echo "Palabra $nuevaPalabra agregada a Wordix.\n";
+            echo 
+            "Palabra $nuevaPalabra agregada a Wordix.\n";
             break;
 
         case 8:
@@ -200,7 +204,7 @@ do {
             echo "Gracias por jugar Wordix. ¡Hasta luego!\n";
             break;
 
-        default:
+        default: 
             echo "Opción no válida. Intente nuevamente.\n";
             break;
     }
