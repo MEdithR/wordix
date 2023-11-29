@@ -108,7 +108,7 @@ function seleccionarOpcion (){
 
 // Declaración de variables:
 $coleccionPartidas = cargarPartidas();
-
+$coleccionPalabras = cargarColeccionPalabras();
 // Proceso:
 do {
     $opcion = seleccionarOpcion();
@@ -117,7 +117,8 @@ do {
         case 1:
             // Jugar Wordix con una palabra elegida
             echo "Ingrese la palabra Wordix a adivinar: ";
-            $palabraWordix = strtoupper(trim(fgets(STDIN)));
+            $inp=trim(fgets(STDIN));
+            $palabraWordix = $coleccionPalabras[$inp - 1];
             echo "Ingrese su nombre de usuario: ";
             $nombreUsuario = trim(fgets(STDIN));
             $partida = jugarWordix($palabraWordix, $nombreUsuario);
@@ -127,7 +128,7 @@ do {
 
         case 2:
             // Jugar Wordix con una palabra aleatoria
-            $coleccionPalabras = cargarColeccionPalabras();
+            
             $palabraAleatoria = $coleccionPalabras[array_rand($coleccionPalabras)];
             echo "Palabra aleatoria elegida: $palabraAleatoria\n";
             echo "Ingrese su nombre de usuario: ";
@@ -192,7 +193,7 @@ do {
         case 7:
             // Agregar una palabra de 5 letras a Wordix
             $nuevaPalabra = leerPalabra5Letras();
-            $coleccionPalabras = cargarColeccionPalabras();
+        
             // Agregar la nueva palabra a la colección
             array_push($coleccionPalabras, $nuevaPalabra);
             echo 
