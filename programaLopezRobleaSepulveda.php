@@ -1,5 +1,6 @@
 <?php
 include_once("wordix.php");
+include_once("programaLopezRoblesSepulveda.php");
 
 
 
@@ -102,26 +103,242 @@ $partida = jugarWordix("MELON", strtolower("MaJo"));
 
 
 
-/*
+/**************************************/
+/*********** PROGRAMA PRINCIPAL *******/
+/**************************************/
+
+
+// Declaración de variables:
+$coleccionPartidas = [];
+$coleccionPalabras = cargarColeccionPalabras();
+// Proceso:
 do {
-    $opcion = ...;
+    $opcion = seleccionarOpcion();
 
-    
+
     switch ($opcion) {
-        case 1: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+        case 1:
+            // Jugar Wordix con una palabra elegida
+            do {
+                echo "Ingrese el numero de palabra Wordix a adivinar: ";
+                $inp=trim(fgets(STDIN));
+
+
+                while (!is_numeric($inp) || $inp <= 0 || $inp >= count($coleccionPalabras)) {
+                    echo "Error: ingreso un numero dentro del rango o ingreso una palabra, pruebe otra vez: ";
+                    $inp = trim(fgets(STDIN));
+                }
+
+
+                $palabraWordix = $coleccionPalabras[$inp - 1];
+                echo "Ingrese su nombre de usuario: ";
+                $nombreUsuario = trim(fgets(STDIN));
+               
+               
+                    $resultadoVerificado = verifMismaPalabra($coleccionPartidas, $palabraWordix, $nombreUsuario);
+               
+                    if ($resultadoVerificado) {
+                        echo "Error: Esta palabra ya fue usada por el mismo usuario. Elige otra palabra o jugador.\n";
+                        // Realizar acciones adicionales si es necesario, como cambiar $palabra o $jugador
+                    }
+               
+            } while ($resultadoVerificado);
+
+
+            // cargo los datos de la part. luego de verificar que el usuario eligio otra palabra
+            $partida = jugarWordix($palabraWordix, $nombreUsuario);
+
+
+            // Agregar la partida a la colección
+            array_push($coleccionPartidas, $partida);
+            break;
+
+
+        case 2:
+            do{
+            // Jugar Wordix con una palabra aleatoria
+            echo "Ingrese su nombre de usuario: ";
+            $nombreUsuario = trim(fgets(STDIN));
+            $palabraAleatoria = $coleccionPalabras[array_rand($coleccionPalabras)];
+            echo "la palabra a adivniar es" . $palabraAleatoria ;
+           
+           
+
+
+            $resultadoVerificado = verifMismaPalabra($coleccionPartidas, $palabraAleatoria, $nombreUsuario);
+               
+                    if ($resultadoVerificado) {
+                        echo "Error: esta palabra random que salio al azar ya a sido usada por el mismo usuario pruebe otra vez " ;
+                        // Realizar acciones adicionales si es necesario, como cambiar $palabra o $jugador
+                    }
+               
+            } while ($resultadoVerificado);
+
+
+            $partida = jugarWordix($palabraAleatoria, $nombreUsuario);
+            // Agregar la partida a la colección
+            array_push($coleccionPartidas, $partida);
+
 
             break;
-        case 2: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
 
-            break;
-        case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
 
+
+
+
+
+
+
+
+
+        case 3:
+               // Mostrar una partida
+             if (empty($coleccionPartidas)) {
+            echo "No existe ninguna partida guardada." ;
+         } else {
+            echo "Ingrese el índice de la partida a mostrar: ";
+            $indicePartida = solicitarNumeroEntre(1, count($coleccionPartidas)) - 1;
+
+
+             // Se verifica si el índice de partida es válido
+             if (isset($coleccionPartidas[$indicePartida])) {
+             $partida = $coleccionPartidas[$indicePartida];
+              imprimirResultadoDos($partida, $indicePartida);
+         } else {
+            echo "Índice de partida no válido.\n";
+            }
+         }
+         break;
+       
+           
+               
+         
+
+
+           
+        case 4:
+            // Mostrar la primera partida ganadora
+            $partidaGanadora = null;
+            foreach ($coleccionPartidas as $partida) {
+                if ($partida["puntaje"] > 0) {
+                    $partidaGanadora = $partida;
+                    break;
+                }
+            }
+           
+
+
+            if ($partidaGanadora !== null) {
+                imprimirResultado($partidaGanadora);
+            } else {
+                echo "El jugador majo no ganó ninguna partida";
+            }
             break;
-        
-            //...
+
+
+        case 5:
+           
+            echo "Ingrese el nombre de usuario: ";
+        $nombreUsuario = trim(fgets(STDIN));
+        $resumenJugador = obtenerResumenJugador($nombreUsuario, $coleccionPartidas);
+
+
+        $partidas = 0;
+        $victorias = 0;
+        $intentoUno = 0;
+        $intentoDos = 0;
+        $intentoTres = 0;
+        $intentoCuatro = 0;
+        $intentoCinco = 0;
+        $intentoSeis = 0;
+        $puntajeTotal = 0;
+
+
+            if ($resumenJugador) {
+                echo "Resumen de $nombreUsuario:\n";
+                echo "Partidas: " . count($resumenJugador) . "\n";
+
+
+                foreach ($resumenJugador as $resumen) {
+                    echo "Palabra: {$resumen['palabraWordix']}, Intentos: {$resumen['intentos']}, Puntaje: {$resumen['puntaje']}\n";
+
+
+                    if ($resumen['intentos'] > 0) {
+                        $victorias++;
+                    }
+
+
+                    switch ($resumen['intentos']) {
+                        case 1:
+                            $intentoUno++;
+                            break;
+                        case 2:
+                            $intentoDos++;
+                            break;
+                        case 3:
+                            $intentoTres++;
+                            break;
+                        case 4:
+                            $intentoCuatro++;
+                            break;
+                        case 5:
+                            $intentoCinco++;
+                            break;
+                        case 6:
+                            $intentoSeis++;
+                            break;
+                        }
+                        $partidas++;  // Increment the count of partidas
+                        $puntajeTotal += $resumen['puntaje'];
+                    }
+                $porcentajeVic = 100 / $partidas * $victorias;
+
+
+                echo "jugador " . $nombreUsuario . "\n";
+                echo "partidas: " . $partidas . "\n";
+                echo "Puntaje Total: " . $puntajeTotal . "\n";
+                echo "Victorias: " . $victorias . "\n";
+                echo "Porcentaje Victorias: " . $porcentajeVic . "%\n";
+                echo "Adivinadas:\n";
+                echo "Intento 1 " . $intentoUno . "\n";
+                echo "Intento 2 " . $intentoDos . "\n";
+                echo "Intento 3 " . $intentoTres . "\n";
+                echo "Intento 4 " . $intentoCuatro . "\n";
+                echo "Intento 5 " . $intentoCinco . "\n";
+                echo "Intento 6 " . $intentoSeis . "\n";
+            } else {
+                echo "No hay partidas registradas para $nombreUsuario.\n";
+            }
+         break;            
+        case 6:
+            $coleccionPartidasOrdenadas = ordenarPartidas($coleccionPartidas);
+       
+            foreach ($coleccionPartidasOrdenadas as $partida) {
+                echo "Palabra: {$partida['palabraWordix']}, Jugador: {$partida['jugador']}, Intentos: {$partida['intentos']}, Puntaje: {$partida['puntaje']}\n";
+            }
+           
+            break;
+
+
+        case 7:
+            // Agregar una palabra de 5 letras a Wordix
+            $nuevaPalabra = leerPalabra5Letras();
+       
+            // Agregar la nueva palabra a la colección
+            array_push($coleccionPalabras, $nuevaPalabra);
+            echo
+            "Palabra $nuevaPalabra agregada a Wordix.\n";
+            break;
+
+
+        case 8:
+            // Salir del juego
+            echo "Gracias por jugar Wordix. ¡Hasta luego!\n";
+            break;
+
+
+        default:
+            echo "Opción no válida. Intente nuevamente.\n";
+            break;
     }
-} while ($opcion != X);
-*/
+} while ($opcion != 8);

@@ -41,12 +41,32 @@ function cargarColeccionPalabras()
  */
 function imprimirResultado($partida)
 {
-    echo "Resultado de la partida:\n";
+    echo "*******************************************" . "\n";
+    echo "Resultado de la partida: " . $indicePartida . "\n";
     echo "Palabra Wordix: " . $partida["palabraWordix"] . "\n";
     echo "Jugador: " . $partida["jugador"] . "\n";
     echo "Intentos: " . $partida["intentos"] . "\n";
     echo "Puntaje: " . $partida["puntaje"] . "\n";
+    echo "*******************************************" . "\n";
 }
+
+
+/**
+ * Imprime el resultado de una partida.
+ * @param array $partida
+ */
+function imprimirResultadoDos($partida, $indicePartida)
+{
+    $indicemasUno= $indicePartida + 1 ;
+    echo "***********************************" . "\n";
+    echo "Resultado de la partida N°: " . $indicemasUno  . "\n";
+    echo "Palabra Wordix: " . $partida["palabraWordix"] . "\n";
+    echo "Jugador: " . $partida["jugador"] . "\n";
+    echo "Intentos: " . $partida["intentos"] . "\n";
+    echo "Puntaje: " . $partida["puntaje"] . "\n";
+    echo "***********************************" . "\n";
+}
+
 
 
 /** inicializa una estructura de datos con partidas de jugadores
@@ -96,9 +116,20 @@ function seleccionarOpcion (){
 
 }
 
-
-
-/* ****COMPLETAR***** */ 
+/** COMPLETAR 
+*@param array $coleccionPart
+*@param string $palabra
+*@param string $jugador
+*@return string
+*/
+function verifMismaPalabra($coleccionPart, $palabra, $jugador) {
+    foreach ($coleccionPart as $item) {
+        if ($item["palabraWordix"] === $palabra && $item["jugador"] === $jugador) {
+            return true; // La combinación ya existe
+        }
+    }
+    return false; // La combinación no existe
+}
 
 
 
