@@ -130,7 +130,7 @@ do {
             // Jugar Wordix con una palabra aleatoria
             
             $palabraAleatoria = $coleccionPalabras[array_rand($coleccionPalabras)];
-            echo "Palabra aleatoria elegida: $palabraAleatoria\n";
+           
             echo "Ingrese su nombre de usuario: ";
             $nombreUsuario = trim(fgets(STDIN));
             $partida = jugarWordix($palabraAleatoria, $nombreUsuario);
@@ -159,6 +159,7 @@ do {
                     break;
                 }
             }
+            
             if ($partidaGanadora !== null) {
                 imprimirResultado($partidaGanadora);
             } else {
