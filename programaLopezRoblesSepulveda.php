@@ -91,8 +91,6 @@ function verifMismaPalabra($coleccionPart, $palabra, $jugador) {
     return false; // La combinación no existe
 }
 
-/* ****COMPLETAR***** */
-
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -162,11 +160,12 @@ do {
         case 3:
             // Mostrar una partida
             if (empty($coleccionPartidas)) {
-                echo "No existe ninguna partida guardada.\n" ;
+                echo "No existe ninguna partida guardada." ;
             } else {
                 echo "Ingrese el índice de la partida a mostrar: ";
                 $indicePartida = solicitarNumeroEntre(1, count($coleccionPartidas)) - 1;
-                    // Se verifica si el índice de partida es válido
+        
+                // Se verifica si el índice de partida es válido
                 if (isset($coleccionPartidas[$indicePartida])) {
                     $partida = $coleccionPartidas[$indicePartida];
                     imprimirResultadoDos($partida, $indicePartida);
@@ -176,22 +175,21 @@ do {
             }
             break;
         case 4:
-            // Mostrar la primera partida ganadora
-            $partidaGanadora = null;
-            foreach ($coleccionPartidas as $partida) {
-                if ($partida["puntaje"] > 0) {
-                    $partidaGanadora = $partida;
-                    break;
+                // Mostrar la primera partida ganadora
+                $partidaGanadora = null;
+                foreach ($coleccionPartidas as $partida) {
+                    if ($partida["puntaje"] > 0) {
+                        $partidaGanadora = $partida;
+                        break;
+                    }
                 }
-            }
-
-            if ($partidaGanadora !== null) {
-                imprimirResultado($partidaGanadora);
-            } else {
-                echo "El jugador majo no ganó ninguna partida";
-            }
-            break;
-
+            
+                if ($partidaGanadora !== null) {
+                    imprimirResultadoDos($partidaGanadora, $indicePartida); // Asegúrate de pasar ambos argumentos
+                } else {
+                    echo "El jugador majo no ganó ninguna partida";
+                }
+                break;
         case 5:
            
             echo "Ingrese el nombre de usuario: ";

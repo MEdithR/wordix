@@ -461,21 +461,18 @@ function ordenarPartidas($coleccionPartidas)
     return $coleccionPartidas;
 }
 
-/**
- * Ordena la colección de partidas por jugador y por palabra
- * @param array $coleccionPartidas
- * @return array Colección de partidas ordenada
- */
-function ordenarPartidas($coleccionPartidas)
+function imprimirResultadoDos($partida, $indicePartida)
 {
-    // Ordena primero por jugador y luego por palabra
-    usort($coleccionPartidas, function ($a, $b) {
-        $cmp1 = strcmp($a['jugador'], $b['jugador']);
-        if ($cmp1 !== 0) {
-            return $cmp1;
-        }
-        return strcmp($a['palabraWordix'], $b['palabraWordix']);
-    });
+    echo "*************************************\n";
+    echo "Partida WORDIX " . ($indicePartida + 1) . ": Palabra " . $partida["palabraWordix"] . "\n";
+    echo "Jugador: " . $partida["jugador"] . "\n";
+    echo "Puntaje: " . $partida["puntaje"] . " puntos\n";
+    
+    if ($partida["intentos"] === 0) {
+        echo "No adivinó la palabra. ¡Inténtelo de nuevo!\n";
+    } else {
+        echo "Intento: " . $partida["intentos"] . "\n";
+    }
 
-    return $coleccionPartidas;
+    echo "*************************************\n";
 }
