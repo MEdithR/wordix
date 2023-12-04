@@ -127,7 +127,6 @@ do {
             // Jugar Wordix con una palabra aleatoria
             $coleccionPalabras = cargarColeccionPalabras();
             $palabraAleatoria = $coleccionPalabras[array_rand($coleccionPalabras)];
-            echo "Palabra aleatoria elegida: $palabraAleatoria\n";
             echo "Ingrese su nombre de usuario: ";
             $nombreUsuario = trim(fgets(STDIN));
             $partida = jugarWordix($palabraAleatoria, $nombreUsuario);
@@ -179,11 +178,14 @@ do {
             break;            
 
         case 6:
-            // Mostrar listado de partidas ordenadas por jugador y por palabra
-            ordenarPartidas($coleccionPartidas);
-            mostrarListadoPartidas($coleccionPartidas);
+            $coleccionPartidasOrdenadas = ordenarPartidas($coleccionPartidas);
+            
+            foreach ($coleccionPartidasOrdenadas as $partida) {
+                echo "Palabra: {$partida['palabraWordix']}, Jugador: {$partida['jugador']}, Intentos: {$partida['intentos']}, Puntaje: {$partida['puntaje']}\n";
+            }
+            
             break;
-
+            
         case 7:
             // Agregar una palabra de 5 letras a Wordix
             $nuevaPalabra = leerPalabra5Letras();
