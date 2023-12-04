@@ -176,24 +176,26 @@ do {
             break;
         case 4:
             // Mostrar la primera partida de un jugador específico
-            echo "Ingrese el nombre del jugador: ";
+            
+                echo "Ingrese el nombre del jugador: ";
                 $nombreJugador = trim(fgets(STDIN)); // Lee la entrada del usuario
-            
-                $partidaJugador = null;
-                $indicePartida = null; // Define $indicePartida aquí
-            
-                foreach ($coleccionPartidas as $indice => $partida) {
-                    if ($partida["jugador"] === $nombreJugador) {
-                        $partidaJugador = $partida;
-                        $indicePartida = $indice;
-                        break;
+                $m=count($coleccionPartidas);
+                $i=0;
+                $encontrado=false;
+                $posicion=-1;
+
+                while($i<$m && !$encontrado){
+                    if(($coleccionPartidas[$i]["jugador"]==$nombreJugador) && $coleccionPartidas[$i]["puntaje"]>0){
+                        $encontrado=true;
+                        $posicion=$i;
                     }
+                    $i +=1;
                 }
-            
-                if ($partidaJugador !== null) {
-                    imprimirResultadoDos($partidaJugador, $indicePartida);
-                } else {
-                    echo "El jugador $nombreJugador no tiene ninguna partida registrada.\n";
+                if ($posicion != -1){
+                    $partidaG=$coleccionPartidas[$posicion];
+                    imprimirResultadoDos($partidaG, $posicion);
+                }else{
+                    echo "No se encontro la partida \n";
                 }
                 break;
             
