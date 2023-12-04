@@ -81,12 +81,7 @@ function seleccionarOpcion (){
     return $opcionVal;
 
 }
-/**ferifica si el jugador uso la misma palabra 
- * @param array $coleccionPart
- * @param string $palabra
- * @param string $jugador
- * @return boolean
- */
+
 function verifMismaPalabra($coleccionPart, $palabra, $jugador) {
     foreach ($coleccionPart as $item) {
         if ($item["palabraWordix"] === $palabra && $item["jugador"] === $jugador) {
@@ -114,7 +109,7 @@ do {
                 echo "Ingrese el numero de palabra Wordix a adivinar: ";
                 $inp=trim(fgets(STDIN));
 
-                 while (!is_numeric($inp) || $inp <= 0 || $inp > count($coleccionPalabras)) {
+                while (!is_numeric($inp) || $inp <= 0 || $inp > count($coleccionPalabras)) {
                     echo "Error: ingreso un numero fuera del rango o ingreso una palabra, pruebe otra vez: ";
                     $inp = trim(fgets(STDIN));
                 }
@@ -137,7 +132,7 @@ do {
 
 
             // Agregar la partida a la colección
-             array_push($coleccionPartidas, $partida);
+            array_push($coleccionPartidas, $partida);
             break;
 
         case 2:
@@ -179,29 +174,27 @@ do {
                 }
             }
             break;
-            case 4:
-                // Mostrar la primera partida de un jugador específico
-                echo "Ingrese el nombre del jugador: ";
+        case 4:
+            // Mostrar la primera partida de un jugador específico
+            echo "Ingrese el nombre del jugador: ";
                 $nombreJugador = trim(fgets(STDIN)); // Lee la entrada del usuario
-                $m=count($coleccionPartidas);
-                $i=0;
-                $encontrado=false;
-                $posicion=-1;
-
-                while($i<$m && !$encontrado){
-                    if(($coleccionPartidas[$i]["jugador"]==$nombreJugador) && $coleccionPartidas[$i]["puntaje"]>0){
-                        $encontrado=true;
-                        $posicion=$i;
+            
+                $partidaJugador = null;
+                $indicePartida = null; // Define $indicePartida aquí
+            
+                foreach ($coleccionPartidas as $indice => $partida) {
+                    if ($partida["jugador"] === $nombreJugador) {
+                        $partidaJugador = $partida;
+                        $indicePartida = $indice;
+                        break;
                     }
-                    $i +=1;
                 }
-                if ($posicion != -1){
-                    $partidaG=$coleccionPartidas[$posicion];
-                    imprimirResultadoDos($partidaG, $posicion);
-                }else{
-                    echo "No se encontro la partida \n";
+            
+                if ($partidaJugador !== null) {
+                    imprimirResultadoDos($partidaJugador, $indicePartida);
+                } else {
+                    echo "El jugador $nombreJugador no tiene ninguna partida registrada.\n";
                 }
-
                 break;
             
             case 5:
