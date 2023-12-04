@@ -141,7 +141,7 @@ do {
             echo "Ingrese su nombre de usuario: ";
             $nombreUsuario = trim(fgets(STDIN));
             $palabraAleatoria = $coleccionPalabras[array_rand($coleccionPalabras)];
-            echo "la palabra a adivniar es" . $palabraAleatoria ;
+           
            
             $resultadoVerificado = verifMismaPalabra($coleccionPartidas, $palabraAleatoria, $nombreUsuario);
                
