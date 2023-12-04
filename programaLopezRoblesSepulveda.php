@@ -175,19 +175,25 @@ do {
             }
             break;
         case 4:
-                // Mostrar la primera partida ganadora
-                $partidaGanadora = null;
-                foreach ($coleccionPartidas as $partida) {
-                    if ($partida["puntaje"] > 0) {
-                        $partidaGanadora = $partida;
-                        break;
-                    }
+            // Mostrar la primera partida ganadora de un jugador específico
+            echo "Ingrese el nombre del jugador: ";
+            $nombreJugador = trim(fgets(STDIN)); // Lee la entrada del usuario
+            
+            $partidaGanadora = null;
+            $indicePartida = null; // Define $indicePartida aquí
+            
+            foreach ($coleccionPartidas as $indice => $partida) {
+                if ($partida["jugador"] === $nombreJugador && $partida["puntaje"] > 0) {
+                    $partidaGanadora = $partida;
+                    $indicePartida = $indice;
+                    break;
                 }
+            }
             
                 if ($partidaGanadora !== null) {
-                    imprimirResultadoDos($partidaGanadora, $indicePartida); // Asegúrate de pasar ambos argumentos
+                    imprimirResultadoDos($partidaGanadora, $indicePartida);
                 } else {
-                    echo "El jugador majo no ganó ninguna partida";
+                    echo "El jugador $nombreJugador no ganó ninguna partida o no existe en las partidas registradas.\n";
                 }
                 break;
         case 5:
