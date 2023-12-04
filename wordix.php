@@ -469,7 +469,7 @@ function imprimirResultadoDos($partida, $indicePartida)
     echo "Puntaje: " . $partida["puntaje"] . " puntos\n";
     
     if ($partida["intentos"] === 0) {
-        echo "No adivinó la palabra. ¡Inténtelo de nuevo!\n";
+        echo "No adivinó la palabra.\n";
     } else {
         echo "Intento: " . $partida["intentos"] . "\n";
     }

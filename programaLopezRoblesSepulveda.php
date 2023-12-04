@@ -96,7 +96,7 @@ function verifMismaPalabra($coleccionPart, $palabra, $jugador) {
 /**************************************/
 
 // Declaración de variables:
-$coleccionPartidas = [];
+$coleccionPartidas = cargarPartidas(); 
 $coleccionPalabras = cargarColeccionPalabras();
 // Proceso:
 do {
@@ -174,108 +174,106 @@ do {
                 }
             }
             break;
-        case 4:
-            // Mostrar la primera partida ganadora de un jugador específico
-            echo "Ingrese el nombre del jugador: ";
-            $nombreJugador = trim(fgets(STDIN)); // Lee la entrada del usuario
+            case 4:
+                // Mostrar la primera partida de un jugador específico
+                echo "Ingrese el nombre del jugador: ";
+                $nombreJugador = trim(fgets(STDIN)); // Lee la entrada del usuario
             
-            $partidaGanadora = null;
-            $indicePartida = null; // Define $indicePartida aquí
+                $partidaJugador = null;
+                $indicePartida = null; // Define $indicePartida aquí
             
-            foreach ($coleccionPartidas as $indice => $partida) {
-                if ($partida["jugador"] === $nombreJugador && $partida["puntaje"] > 0) {
-                    $partidaGanadora = $partida;
-                    $indicePartida = $indice;
-                    break;
+                foreach ($coleccionPartidas as $indice => $partida) {
+                    if ($partida["jugador"] === $nombreJugador) {
+                        $partidaJugador = $partida;
+                        $indicePartida = $indice;
+                        break;
+                    }
                 }
-            }
             
-                if ($partidaGanadora !== null) {
-                    imprimirResultadoDos($partidaGanadora, $indicePartida);
+                if ($partidaJugador !== null) {
+                    imprimirResultadoDos($partidaJugador, $indicePartida);
                 } else {
-                    echo "El jugador $nombreJugador no ganó ninguna partida o no existe en las partidas registradas.\n";
+                    echo "El jugador $nombreJugador no tiene ninguna partida registrada.\n";
                 }
                 break;
-        case 5:
-           
-            echo "Ingrese el nombre de usuario: ";
-        $nombreUsuario = trim(fgets(STDIN));
-        $resumenJugador = obtenerResumenJugador($nombreUsuario, $coleccionPartidas);
-
-        $partidas = 0;
-        $victorias = 0;
-        $intentoUno = 0;
-        $intentoDos = 0;
-        $intentoTres = 0;
-        $intentoCuatro = 0;
-        $intentoCinco = 0;
-        $intentoSeis = 0;
-        $puntajeTotal = 0;
-
-            if ($resumenJugador) {
-                echo "Resumen de $nombreUsuario:\n";
-                echo "Partidas: " . count($resumenJugador) . "\n";
-
-                foreach ($resumenJugador as $resumen) {
-                    echo "Palabra: {$resumen['palabraWordix']}, Intentos: {$resumen['intentos']}, Puntaje: {$resumen['puntaje']}\n";
-
-
-                    if ($resumen['intentos'] > 0) {
-                        $victorias++;
-                    }
-
-                    switch ($resumen['intentos']) {
-                        case 1:
-                            $intentoUno++;
-                            break;
-                        case 2:
-                            $intentoDos++;
-                            break;
-                        case 3:
-                            $intentoTres++;
-                            break;
-                        case 4:
-                            $intentoCuatro++;
-                            break;
-                        case 5:
-                            $intentoCinco++;
-                            break;
-                        case 6:
-                            $intentoSeis++;
-                            break;
+            
+            case 5:
+                echo "Ingrese el nombre de usuario: ";
+                $nombreUsuario = trim(fgets(STDIN));
+                $resumenJugador = obtenerResumenJugador($nombreUsuario, $coleccionPartidas);
+            
+                $partidas = 0;
+                $victorias = 0;
+                $intentoUno = 0;
+                $intentoDos = 0;
+                $intentoTres = 0;
+                $intentoCuatro = 0;
+                $intentoCinco = 0;
+                $intentoSeis = 0;
+                $puntajeTotal = 0;
+            
+                if ($resumenJugador) {
+                    echo "Resumen de $nombreUsuario:\n";
+                    echo "Partidas: " . count($resumenJugador) . "\n";
+            
+                    foreach ($resumenJugador as $resumen) {
+                        echo "Palabra: {$resumen['palabraWordix']}, Intentos: {$resumen['intentos']}, Puntaje: {$resumen['puntaje']}\n";
+            
+                        if ($resumen['intentos'] > 0) {
+                            $victorias++;
                         }
-                        $partidas++; 
+            
+                        switch ($resumen['intentos']) {
+                            case 1:
+                                $intentoUno++;
+                                break;
+                            case 2:
+                                $intentoDos++;
+                                break;
+                            case 3:
+                                $intentoTres++;
+                                break;
+                            case 4:
+                                $intentoCuatro++;
+                                break;
+                            case 5:
+                                $intentoCinco++;
+                                break;
+                            case 6:
+                                $intentoSeis++;
+                                break;
+                        }
+                        $partidas++;
                         $puntajeTotal += $resumen['puntaje'];
                     }
-                $porcentajeVic = 100 / $partidas * $victorias;
-                echo "***************************\n";
-                echo "jugador " . $nombreUsuario . "\n";
-                echo "partidas: " . $partidas . "\n";
-                echo "Puntaje Total: " . $puntajeTotal . "\n";
-                echo "Victorias: " . $victorias . "\n";
-                echo "Porcentaje Victorias: " . $porcentajeVic . "%\n";
-                echo "Adivinadas:\n";
-                echo "   Intento 1 " . $intentoUno . "\n";
-                echo "   Intento 2 " . $intentoDos . "\n";
-                echo "   Intento 3 " . $intentoTres . "\n";
-                echo "   Intento 4 " . $intentoCuatro . "\n";
-                echo "   Intento 5 " . $intentoCinco . "\n";
-                echo "   Intento 6 " . $intentoSeis . "\n";
-                echo "***************************\n";
-            } else {
-                echo "No hay partidas registradas para $nombreUsuario.\n";
-            }
-         break;            
-
-        case 6:
-            $coleccionPartidasOrdenadas = ordenarPartidas($coleccionPartidas);
-       
-            foreach ($coleccionPartidasOrdenadas as $partida) {
-                echo "Palabra: {$partida['palabraWordix']}, Jugador: {$partida['jugador']}, Intentos: {$partida['intentos']}, Puntaje: {$partida['puntaje']}\n";
-            }
-           
-            break;
-
+                    $porcentajeVic = 100 / $partidas * $victorias;
+                    echo "***************************\n";
+                    echo "jugador " . $nombreUsuario . "\n";
+                    echo "partidas: " . $partidas . "\n";
+                    echo "Puntaje Total: " . $puntajeTotal . "\n";
+                    echo "Victorias: " . $victorias . "\n";
+                    echo "Porcentaje Victorias: " . $porcentajeVic . "%\n";
+                    echo "Adivinadas:\n";
+                    echo "   Intento 1 " . $intentoUno . "\n";
+                    echo "   Intento 2 " . $intentoDos . "\n";
+                    echo "   Intento 3 " . $intentoTres . "\n";
+                    echo "   Intento 4 " . $intentoCuatro . "\n";
+                    echo "   Intento 5 " . $intentoCinco . "\n";
+                    echo "   Intento 6 " . $intentoSeis . "\n";
+                    echo "***************************\n";
+                } else {
+                    echo "No hay partidas registradas para $nombreUsuario.\n";
+                }
+                break;
+            
+            case 6:
+                $coleccionPartidasOrdenadas = ordenarPartidas($coleccionPartidas);
+            
+                foreach ($coleccionPartidasOrdenadas as $partida) {
+                    echo "Palabra: {$partida['palabraWordix']}, Jugador: {$partida['jugador']}, Intentos: {$partida['intentos']}, Puntaje: {$partida['puntaje']}\n";
+                }
+            
+                break;
         case 7:
             // Agregar una palabra de 5 letras a Wordix
             $nuevaPalabra = leerPalabra5Letras();
