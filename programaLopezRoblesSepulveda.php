@@ -1,6 +1,19 @@
 <?php
 include_once("wordix.php");
 
+function primerPartidaGanda ($nombreJugador, $coleccionPartidas){
+$PrimerGanador = null;
+$i= 0;
+while($i < count($coleccioPartidas)){
+if ($coleccionPartidas [$i] ["jugador"] == $nombreJugador && $coleccionPartidas[$i]["puntaje"]>0){
+    $PrimerGanador = $i;
+ 
+} 
+$i++;
+}
+}
+
+
 
 
 /**************************************/
@@ -82,13 +95,17 @@ function seleccionarOpcion (){
 
 }
 
-function verifMismaPalabra($coleccionPart, $palabra, $jugador) {
-    foreach ($coleccionPart as $item) {
-        if ($item["palabraWordix"] === $palabra && $item["jugador"] === $jugador) {
-            return true; // La combinación ya existe
-        }
-    }
-    return false; // La combinación no existe
+function verifMismaPalabra($coleccionPart, $palabra, $jugador) { 
+    $i = 0; $n = count($coleccionPart);
+    $valorVerdad = false;
+    while ($i < $n && !$valorVerdad) { 
+        if ($coleccionPart[$i]["palabraWordix"] === $palabra && $coleccionPart[$i]["jugador"] === $jugador) 
+        { 
+            $valorVerdad = true; 
+    } 
+    $i++;
+    } 
+    return $valorVerdad;
 }
 
 /**************************************/
@@ -202,7 +219,8 @@ do {
             case 5:
                 echo "Ingrese el nombre de usuario: ";
                 $nombreUsuario = trim(fgets(STDIN));
-                $resumenJugador = obtenerResumenJugador($nombreUsuario, $coleccionPartidas);
+            
+                $resumenJugador = resumenJugador($nombreUsuario, $coleccionPartidas);
             
                 $partidas = 0;
                 $victorias = 0;
@@ -245,9 +263,11 @@ do {
                                 $intentoSeis++;
                                 break;
                         }
+            
                         $partidas++;
                         $puntajeTotal += $resumen['puntaje'];
                     }
+            
                     $porcentajeVic = 100 / $partidas * $victorias;
                     echo "***************************\n";
                     echo "jugador " . $nombreUsuario . "\n";
@@ -256,12 +276,12 @@ do {
                     echo "Victorias: " . $victorias . "\n";
                     echo "Porcentaje Victorias: " . $porcentajeVic . "%\n";
                     echo "Adivinadas:\n";
-                    echo "   Intento 1 " . $intentoUno . "\n";
-                    echo "   Intento 2 " . $intentoDos . "\n";
-                    echo "   Intento 3 " . $intentoTres . "\n";
-                    echo "   Intento 4 " . $intentoCuatro . "\n";
-                    echo "   Intento 5 " . $intentoCinco . "\n";
-                    echo "   Intento 6 " . $intentoSeis . "\n";
+                    echo " Intento 1 " . $intentoUno . "\n";
+                    echo " Intento 2 " . $intentoDos . "\n";
+                    echo " Intento 3 " . $intentoTres . "\n";
+                    echo " Intento 4 " . $intentoCuatro . "\n";
+                    echo " Intento 5 " . $intentoCinco . "\n";
+                    echo " Intento 6 " . $intentoSeis . "\n";
                     echo "***************************\n";
                 } else {
                     echo "No hay partidas registradas para $nombreUsuario.\n";

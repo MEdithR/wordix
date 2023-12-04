@@ -476,3 +476,19 @@ function imprimirResultadoDos($partida, $indicePartida)
 
     echo "*************************************\n";
 }
+
+function resumenJugador($nombreUsuario, $coleccionPartidas) {
+    $resumenJugador = array();
+
+    foreach ($coleccionPartidas as $partida) {
+        if ($partida['jugador'] == $nombreUsuario) {
+            $resumenJugador[] = array(
+                'palabraWordix' => $partida['palabraWordix'],
+                'intentos' => $partida['intentos'],
+                'puntaje' => $partida['puntaje']
+            );
+        }
+    }
+
+    return $resumenJugador;
+}
