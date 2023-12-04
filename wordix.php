@@ -442,6 +442,24 @@ function obtenerResumenJugador($jugador, $coleccionPartidas)
 
     return $resumen;
 }
+/**
+ * Ordena la colección de partidas por jugador y por palabra
+ * @param array $coleccionPartidas
+ * @return array Colección de partidas ordenada
+ */
+function ordenarPartidas($coleccionPartidas)
+{
+    // Ordena primero por jugador y luego por palabra
+    usort($coleccionPartidas, function ($a, $b) {
+        $cmp1 = strcmp($a['jugador'], $b['jugador']);
+        if ($cmp1 !== 0) {
+            return $cmp1;
+        }
+        return strcmp($a['palabraWordix'], $b['palabraWordix']);
+    });
+
+    return $coleccionPartidas;
+}
 
 /**
  * Ordena la colección de partidas por jugador y por palabra
