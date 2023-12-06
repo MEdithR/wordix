@@ -461,6 +461,11 @@ function ordenarPartidas($coleccionPartidas)
     return $coleccionPartidas;
 }
 
+/** Muestra el resultado de un jugador
+ *@param array $partida
+ *@param int $indicePartida
+ *@return 
+ */
 function imprimirResultadoDos($partida, $indicePartida)
 {
     echo "*************************************\n";
