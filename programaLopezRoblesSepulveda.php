@@ -94,7 +94,12 @@ function seleccionarOpcion (){
     return $opcionVal;
 
 }
-
+/** Verifica si se uso la misma palabra
+ * @param array $coleccionPart
+ * @param string $palabra
+ * @param string $jugador
+ * @return boolean
+ */
 function verifMismaPalabra($coleccionPart, $palabra, $jugador) { 
     $i = 0; $n = count($coleccionPart);
     $valorVerdad = false;
@@ -199,20 +204,32 @@ do {
                 $m=count($coleccionPartidas);
                 $i=0;
                 $encontrado=false;
-                $posicion=-1;
+                $posicion=-2;
 
                 while($i<$m && !$encontrado){
-                    if(($coleccionPartidas[$i]["jugador"]==$nombreJugador) && $coleccionPartidas[$i]["puntaje"]>0){
+                    if($coleccionPartidas[$i]["jugador"]==$nombreJugador) {
+                        $posicion= -1;
+                        if($coleccionPartidas[$i]["puntaje"]!= 0){
                         $encontrado=true;
                         $posicion=$i;
                     }
-                    $i +=1;
+                    
                 }
-                if ($posicion != -1){
+                $i +=1;
+                }
+                if ($posicion == -2){
+                    echo "*********************************************** \n";
+                    echo "El jugador ". $nombreJugador. " no jugo ninguna partida \n";
+                    echo "*********************************************** \n";
+
+                }elseif($posicion == -1){
+                    echo "*********************************************** \n";
+                    echo  $nombreJugador . " No registra partidas ganadas \n";
+                    echo "*********************************************** \n";
+
+                }else{
                     $partidaG=$coleccionPartidas[$posicion];
                     imprimirResultadoDos($partidaG, $posicion);
-                }else{
-                    echo "No se encontro la partida \n";
                 }
                 break;
             
