@@ -482,7 +482,7 @@ function imprimirResultadoDos($partida, $indicePartida)
     echo "*************************************\n";
 }
 
-function resumenJugador($nombreUsuario, $coleccionPartidas) {
+function resumenJugadorVer($nombreUsuario, $coleccionPartidas) {
     $resumenJugador = array();
 
     foreach ($coleccionPartidas as $partida) {

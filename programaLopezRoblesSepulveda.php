@@ -113,6 +113,93 @@ function verifMismaPalabra($coleccionPart, $palabra, $jugador) {
     return $valorVerdad;
 }
 
+/** Crea un resumen de un jugador
+ *@param array $partidasJugadas
+ *@param string $nombreJugador
+ *@return array
+ */
+function resumenJugador ($nombreJugador, $partidasJugadas){
+//@param array $resumenJugador//
+    $resumenJugador=[];
+
+    $partidas = 0;
+    $victorias = 0;
+    $intentoUno = 0;
+    $intentoDos = 0;
+    $intentoTres = 0;
+    $intentoCuatro = 0;
+    $intentoCinco = 0;
+    $intentoSeis = 0;
+    $puntajeTotal = 0;
+
+    foreach($partidasJugadas as $partidasJ){
+
+        if($partidasJ["jugador"] == $nombreJugador){
+        $partidas +=1;
+        $puntajeTotal = $partidasJ["puntaje"]+$puntajeTotal;
+
+        if ($partidasJ["puntaje"] > 0) {
+            $victorias +=1;
+        }
+
+        switch ($partidasJ["intentos"]) {
+            case 1:
+                $intentoUno++;
+                break;
+            case 2:
+                $intentoDos++;
+                break;
+            case 3:
+                $intentoTres++;
+                break;
+            case 4:
+                $intentoCuatro++;
+                break;
+            case 5:
+                $intentoCinco++;
+                break;
+            case 6:
+                $intentoSeis++;
+                break;
+        }
+    }
+      
+    }
+    if($partidas != 0){
+        $porcentajeVic = 100 / $partidas * $victorias;
+        $resumenJugador=["nombre"=>$nombreJugador, "partidas"=>$partidas, "puntaje"=>$puntajeTotal, "victorias"=>$victorias,
+     "porcentaje"=>(int)$porcentajeVic, "intento1"=>$intentoUno, "intento2"=>$intentoDos, "intento3"=>$intentoTres, "intento4"=>$intentoCuatro,
+     "intento5"=>$intentoCinco, "intento6"=>$intentoSeis];
+
+    }
+
+    
+return $resumenJugador;
+}
+
+/** Escribe el arreglo resumen del jugador
+ * @param array $resumen
+ */
+
+function escribirResumen($resumen){
+
+
+ echo "*******************************\n";
+ echo "jugador " . $resumen["nombre"] . "\n";
+ echo "partidas: " . $resumen["partidas"] . "\n";
+ echo "Puntaje Total: " . $resumen["puntaje"] . "\n";
+ echo "Victorias: " . $resumen["victorias"] . "\n";
+ echo "Porcentaje Victorias: " . $resumen["porcentaje"] . "%\n";
+ echo "Adivinadas:\n";
+ echo " Intento 1 " . $resumen["intento1"] . "\n";
+ echo " Intento 2 " . $resumen["intento2"] . "\n";
+ echo " Intento 3 " . $resumen["intento3"] . "\n";
+ echo " Intento 4 " . $resumen["intento4"] . "\n";
+ echo " Intento 5 " . $resumen["intento5"] . "\n";
+ echo " Intento 6 " . $resumen["intento6"] . "\n";
+ echo "********************************\n";
+
+}
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -239,67 +326,13 @@ do {
             
                 $resumenJugador = resumenJugador($nombreUsuario, $coleccionPartidas);
             
-                $partidas = 0;
-                $victorias = 0;
-                $intentoUno = 0;
-                $intentoDos = 0;
-                $intentoTres = 0;
-                $intentoCuatro = 0;
-                $intentoCinco = 0;
-                $intentoSeis = 0;
-                $puntajeTotal = 0;
+        
             
                 if ($resumenJugador) {
                     echo "Resumen de $nombreUsuario:\n";
-                    echo "Partidas: " . count($resumenJugador) . "\n";
+                    escribirResumen($resumenJugador);
             
-                    foreach ($resumenJugador as $resumen) {
-                        echo "Palabra: {$resumen['palabraWordix']}, Intentos: {$resumen['intentos']}, Puntaje: {$resumen['puntaje']}\n";
-            
-                        if ($resumen['intentos'] > 0) {
-                            $victorias++;
-                        }
-            
-                        switch ($resumen['intentos']) {
-                            case 1:
-                                $intentoUno++;
-                                break;
-                            case 2:
-                                $intentoDos++;
-                                break;
-                            case 3:
-                                $intentoTres++;
-                                break;
-                            case 4:
-                                $intentoCuatro++;
-                                break;
-                            case 5:
-                                $intentoCinco++;
-                                break;
-                            case 6:
-                                $intentoSeis++;
-                                break;
-                        }
-            
-                        $partidas++;
-                        $puntajeTotal += $resumen['puntaje'];
-                    }
-            
-                    $porcentajeVic = 100 / $partidas * $victorias;
-                    echo "***************************\n";
-                    echo "jugador " . $nombreUsuario . "\n";
-                    echo "partidas: " . $partidas . "\n";
-                    echo "Puntaje Total: " . $puntajeTotal . "\n";
-                    echo "Victorias: " . $victorias . "\n";
-                    echo "Porcentaje Victorias: " . $porcentajeVic . "%\n";
-                    echo "Adivinadas:\n";
-                    echo " Intento 1 " . $intentoUno . "\n";
-                    echo " Intento 2 " . $intentoDos . "\n";
-                    echo " Intento 3 " . $intentoTres . "\n";
-                    echo " Intento 4 " . $intentoCuatro . "\n";
-                    echo " Intento 5 " . $intentoCinco . "\n";
-                    echo " Intento 6 " . $intentoSeis . "\n";
-                    echo "***************************\n";
+                    
                 } else {
                     echo "No hay partidas registradas para $nombreUsuario.\n";
                 }
