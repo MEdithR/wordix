@@ -200,6 +200,30 @@ function escribirResumen($resumen){
  echo "********************************\n";
 
 }
+
+
+/**Compara nombre de jugador y palabra de wordix para uasort
+ *@return int
+ */
+function compara($valorA,$valorB){
+
+    if($valorA["jugador"]>$valorB["jugador"]){
+        $orden=1;
+    }elseif($valorA["jugador"]<$valorB["jugador"]){
+        $orden=-1;
+    }else{
+        if($valorA["palabraWordix"]>$valorB["palabraWordix"]){
+            $orden=1;
+        }elseif($valorA["palabraWordix"]<$valorB["palabraWordix"]){
+            $orden=-1;
+        }
+    }
+    return $orden;
+}
+
+
+
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -321,6 +345,7 @@ do {
                 break;
             
             case 5:
+                //crea y muestra el resumen de un jugador
                 echo "Ingrese el nombre de usuario: ";
                 $nombreUsuario = trim(fgets(STDIN));
             
@@ -338,13 +363,11 @@ do {
                 }
                 break;
             
-            case 6:
-                $coleccionPartidasOrdenadas = ordenarPartidas($coleccionPartidas);
-            
-                foreach ($coleccionPartidasOrdenadas as $partida) {
-                    echo "Palabra: {$partida['palabraWordix']}, Jugador: {$partida['jugador']}, Intentos: {$partida['intentos']}, Puntaje: {$partida['puntaje']}\n";
-                }
-            
+             case 6:
+                //muestra un listado de partidas ordenadas por jugador y por palabra
+                uasort($coleccionPartidas,"compara");//ordena un arreglo en base a una comparacion
+                print_r($coleccionPartidas);//muestra el arreglo
+
                 break;
         case 7:
             // Agregar una palabra de 5 letras a Wordix
