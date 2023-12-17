@@ -201,29 +201,59 @@ function escribirResumen($resumen){
 
 }
 
+/**Busca en un arreglo y debuenlve un indice numerico
+ * @param
+ */
 
-/**Compara nombre de jugador y palabra de wordix para uasort
+
+/** Compara nombre de jugador y palabra de wordix para uasort
+ *@param array $partidaA  //recordar que son arreglos asociativos/
+ *@param array $partidaB
  *@return int
  */
-function compara($valorA,$valorB){
+function compara($partidaA,$partidaB){
 
-    if($valorA["jugador"]>$valorB["jugador"]){
+    if($partidaA["jugador"]>$partidaB["jugador"]){
         $orden=1;
-    }elseif($valorA["jugador"]<$valorB["jugador"]){
+    }elseif($partidaA["jugador"]<$partidaB["jugador"]){
         $orden=-1;
     }else{
-        if($valorA["palabraWordix"]>$valorB["palabraWordix"]){
+        if($partidaA["palabraWordix"]>$partidaB["palabraWordix"]){
             $orden=1;
-        }elseif($valorA["palabraWordix"]<$valorB["palabraWordix"]){
+        }elseif($partidaA["palabraWordix"]<$partidaB["palabraWordix"]){
             $orden=-1;
+        }else{
+            $orden=0;
         }
     }
     return $orden;
 }
 
 
+/** comprueba si el jugador existe y si tiene victorias
+ * @param string $jugadorP
+ * @param array $arregloPartidas
+ * @return int
+ */
+function partidaJugador ($jugadorP,$arregloPartidas){
+    $m=count($arregloPartidas);
+    $i=0;
+    $encontrado=false;
+    $posicion=-2;
 
-
+         while($i<$m && !$encontrado){
+             if($arregloPartidas[$i]["jugador"]==$jugadorP) {
+                 $posicion= -1;
+                if($arregloPartidas[$i]["puntaje"]!= 0){
+                    $encontrado=true;
+                    $posicion=$i;
+                }
+                    
+            }
+                        $i +=1;
+        }
+        return $posicion;
+}
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -312,39 +342,27 @@ do {
             
                 echo "Ingrese el nombre del jugador: ";
                 $nombreJugador = trim(fgets(STDIN)); // Lee la entrada del usuario
-                $m=count($coleccionPartidas);
-                $i=0;
-                $encontrado=false;
-                $posicion=-2;
-
-                while($i<$m && !$encontrado){
-                    if($coleccionPartidas[$i]["jugador"]==$nombreJugador) {
-                        $posicion= -1;
-                        if($coleccionPartidas[$i]["puntaje"]!= 0){
-                        $encontrado=true;
-                        $posicion=$i;
-                    }
-                    
-                }
-                $i +=1;
-                }
-                if ($posicion == -2){
+                $indice = partidaJugador($nombreJugador,$coleccionPartidas);
+                
+                if ($indice == -2){
                     echo "*********************************************** \n";
                     echo "El jugador ". $nombreJugador. " no jugo ninguna partida \n";
                     echo "*********************************************** \n";
 
-                }elseif($posicion == -1){
+                }elseif($indice == -1){
                     echo "*********************************************** \n";
                     echo  $nombreJugador . " No registra partidas ganadas \n";
                     echo "*********************************************** \n";
 
                 }else{
-                    $partidaG=$coleccionPartidas[$posicion];
-                    imprimirResultadoDos($partidaG, $posicion);
+                    $partidaG=$coleccionPartidas[$indice];
+                    imprimirResultadoDos($partidaG, $indice);
                 }
-                break;
+                //cambiar a un modulo retone -2 -1 indice/
+            break;
+
             
-            case 5:
+        case 5:
                 //crea y muestra el resumen de un jugador
                 echo "Ingrese el nombre de usuario: ";
                 $nombreUsuario = trim(fgets(STDIN));
@@ -361,26 +379,26 @@ do {
                 } else {
                     echo "No hay partidas registradas para $nombreUsuario.\n";
                 }
-                break;
+            break;
             
-             case 6:
+        case 6:
                 //muestra un listado de partidas ordenadas por jugador y por palabra
                 uasort($coleccionPartidas,"compara");//ordena un arreglo en base a una comparacion
                 print_r($coleccionPartidas);//muestra el arreglo
 
-                break;
+            break;
         case 7:
             // Agregar una palabra de 5 letras a Wordix
-            $nuevaPalabra = leerPalabra5Letras();
+             $nuevaPalabra = leerPalabra5Letras();
                
             // Verificar si la palabra ya existe en la colección
-            if (in_array($nuevaPalabra, $coleccionPalabras)) {
+              if (in_array($nuevaPalabra, $coleccionPalabras)) {
                 echo "La palabra ya existe en Wordix. Por favor, elige otra palabra.\n";
-            } else {
+              } else {
                 // Agregar la nueva palabra a la colección
                 array_push($coleccionPalabras, $nuevaPalabra);
                 echo "Palabra " . $nuevaPalabra . " agregada a Wordix.\n";
-            }
+                }
             break;
 
         case 8:
