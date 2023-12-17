@@ -358,7 +358,7 @@ do {
                     $partidaG=$coleccionPartidas[$indice];
                     imprimirResultadoDos($partidaG, $indice);
                 }
-                //cambiar a un modulo retone -2 -1 indice/
+                
             break;
 
             
