@@ -442,24 +442,7 @@ function obtenerResumenJugador($jugador, $coleccionPartidas)
 
     return $resumen;
 }
-/**
- * Ordena la colección de partidas por jugador y por palabra
- * @param array $coleccionPartidas
- * @return array Colección de partidas ordenada
- */
-function ordenarPartidas($coleccionPartidas)
-{
-    // Ordena primero por jugador y luego por palabra
-    usort($coleccionPartidas, function ($a, $b) {
-        $cmp1 = strcmp($a['jugador'], $b['jugador']);
-        if ($cmp1 !== 0) {
-            return $cmp1;
-        }
-        return strcmp($a['palabraWordix'], $b['palabraWordix']);
-    });
 
-    return $coleccionPartidas;
-}
 
 /** Muestra el resultado de un jugador
  *@param array $partida
@@ -482,18 +465,3 @@ function imprimirResultadoDos($partida, $indicePartida)
     echo "*************************************\n";
 }
 
-function resumenJugadorVer($nombreUsuario, $coleccionPartidas) {
-    $resumenJugador = array();
-
-    foreach ($coleccionPartidas as $partida) {
-        if ($partida['jugador'] == $nombreUsuario) {
-            $resumenJugador[] = array(
-                'palabraWordix' => $partida['palabraWordix'],
-                'intentos' => $partida['intentos'],
-                'puntaje' => $partida['puntaje']
-            );
-        }
-    }
-
-    return $resumenJugador;
-}
